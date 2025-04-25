@@ -10,7 +10,7 @@ source:
   sha256: dac39c32073b20d451e6bc88d8fb69e757d1bb947c91165e7247b7cd8c3ce62c
 
 build:
-  number: 0
+  number: 1
   entry_points:
     - swashes = swashes:main
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
