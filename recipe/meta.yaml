@@ -18,7 +18,7 @@ build:
 requirements:
   build:
     - {{ compiler('cxx') }}
-    - {{ stdlib("c") }},
+    - {{ stdlib("c") }}
     - cmake
     - make  # [not win]
   host:
