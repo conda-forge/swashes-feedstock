@@ -10,16 +10,17 @@ source:
   sha256: dac39c32073b20d451e6bc88d8fb69e757d1bb947c91165e7247b7cd8c3ce62c
 
 build:
-  number: 0
+  number: 1
   entry_points:
     - swashes = swashes:main
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
-  host:
+  build:
     - {{ compiler('cxx') }}
     - cmake
     - make  # [not win]
+  host:
     - python
     - scikit-build-core >=0.11
     - pip
@@ -29,11 +30,15 @@ requirements:
 test:
   imports:
     - swashes
-  commands:
-    - pip check
   requires:
     - pip
     - python
+    - pytest >=3.8
+  source_files:
+    - tests
+  commands:
+    - pip check
+    - pytest tests
 
 about:
   home: https://www.idpoisson.fr/swashes/
