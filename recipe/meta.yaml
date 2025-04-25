@@ -1,32 +1,43 @@
-{% set name = "SWASHES" %}
-{% set version = "1.03.00" %}
-{% set renater_num = "4900" %}
+{% set name = "swashes" %}
+{% set version = "1.5.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://sourcesup.renater.fr/frs/download.php/file/{{ renater_num }}/{{ name }}-{{ version }}.zip
-  sha256: 05adfe317369e03821aaf424b25688fe416b055b88ddee78702769760689ca0d
-  patches:
-    - swashes.patch
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/swashes-{{ version }}.tar.gz
+  sha256: dac39c32073b20d451e6bc88d8fb69e757d1bb947c91165e7247b7cd8c3ce62c
 
 build:
-  number: 1
+  entry_points:
+    - swashes = swashes:main
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
 
 requirements:
-  build:
-    - {{ compiler('cxx') }}
-    - cmake
-    - make  # [not win]
+  host:
+    - python >=3.10
+    - scikit-build-core >=0.11
+    - pip
+  run:
+    - python >=3.10
+
+test:
+  imports:
+    - swashes
+  commands:
+    - pip check
+    - swashes --help
+  requires:
+    - pip
 
 about:
-  home: https://sourcesup.renater.fr/projects/swashes/
+  summary: A Python package for the SWASHES executable.
   license: CECILL-2.0
-  license_family: OTHER
-  license_file: LICENSE
-  summary: "Shallow-Water Analytic Solutions for Hydraulic and Environmental Studies."
+  license_file: LICENSE_en.txt
+  dev_url: https://sourcesup.renater.fr/projects/swashes/
 
 extra:
   recipe-maintainers:
