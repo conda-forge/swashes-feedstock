@@ -10,17 +10,19 @@ source:
   sha256: dac39c32073b20d451e6bc88d8fb69e757d1bb947c91165e7247b7cd8c3ce62c
 
 build:
+  number: 0
   entry_points:
     - swashes = swashes:main
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
 
 requirements:
   host:
+    - {{ compiler('cxx') }}
+    - cmake
+    - make  # [not win]
     - python
     - scikit-build-core >=0.11
     - pip
-    - cmake >=3.18
   run:
     - python
 
@@ -29,17 +31,15 @@ test:
     - swashes
   commands:
     - pip check
-    - pytest
   requires:
     - pip
-    - pytest >=8.3.5
     - python
 
 about:
   home: https://www.idpoisson.fr/swashes/
   summary: A Python package for the SWASHES executable.
   license: CECILL-2.0
-  license_file: LICENSE_en.txt
+  license_file: LICENSE.txt
   dev_url: https://sourcesup.renater.fr/projects/swashes/
 
 extra:
