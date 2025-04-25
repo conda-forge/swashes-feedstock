@@ -27,14 +27,14 @@ requirements:
     - scikit-build-core >=0.11
     - pip
   run:
-    - python >=3.10
+    - python
 
 test:
   imports:
     - swashes
   requires:
     - pip
-    - python >=3.10
+    - python
     - pytest >=3.8
   source_files:
     - tests
