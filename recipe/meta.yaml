@@ -12,26 +12,28 @@ source:
 build:
   entry_points:
     - swashes = swashes:main
-  noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
 
 requirements:
   host:
-    - python >=3.10
+    - python {{ python_min }}
     - scikit-build-core >=0.11
     - pip
+    - cmake >=3.18
   run:
-    - python >=3.10
+    - python >={{ python_min }}
 
 test:
   imports:
     - swashes
   commands:
     - pip check
-    - swashes --help
+    - pytest
   requires:
     - pip
+    - pytest >=8.3.5
+    - python {{ python_min }}
 
 about:
   summary: A Python package for the SWASHES executable.
