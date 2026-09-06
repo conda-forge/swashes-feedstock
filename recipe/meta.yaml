@@ -6,12 +6,12 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/swashes-{{ version }}.tar.gz
+  url: https://files.pythonhosted.org/packages/source/{{ name[0] }}/{{ name }}/swashes-{{ version }}.tar.gz
   sha256: dac39c32073b20d451e6bc88d8fb69e757d1bb947c91165e7247b7cd8c3ce62c
 
 build:
   skip: true  # [py<310]
-  number: 3
+  number: 4
   entry_points:
     - swashes = swashes:main
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
